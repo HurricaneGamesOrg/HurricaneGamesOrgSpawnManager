@@ -19,7 +19,7 @@ public class SpawnTeleportCommand extends CommandBasic<SpawnCommandHelper> {
 
 	@Override
 	protected String getHelpExplainMessage() {
-		return "телепортирует на спавн";
+		return "teleports to spawn";
 	}
 
 }

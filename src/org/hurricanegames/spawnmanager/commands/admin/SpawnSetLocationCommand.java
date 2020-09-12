@@ -18,12 +18,12 @@ public class SpawnSetLocationCommand extends CommandBasic<SpawnCommandHelper> {
 	) {
 		helper.getContainer().setLocation(senderPlayer.getLocation());
 		helper.getContainer().save();
-		throw new CommandResponseException(ChatColor.GREEN + "Точка спавна установлена");
+		throw new CommandResponseException(ChatColor.GREEN + "Spawn point set");
 	}
 
 	@Override
 	protected String getHelpExplainMessage() {
-		return "устанавливает позицию первого спавна для новых игроков";
+		return "Sets spawn point for players without defined spawn location";
 	}
 
 }

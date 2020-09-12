@@ -17,15 +17,15 @@ public class SpawnForceTeleportCommand extends CommandBasic<SpawnCommandHelper> 
 		@CommandArgumentDefinition(CommandBasic.CommandArgumentOnlinePlayer.class) Player otherPlayer
 	) {
 		if (helper.getContainer().forceTeleport(otherPlayer)) {
-			throw new CommandResponseException(ChatColor.GREEN + "Игрок {0} телепортирован на спавн", otherPlayer.getName());
+			throw new CommandResponseException(ChatColor.GREEN + "Player {0} teleported to spawn", otherPlayer.getName());
 		} else {
-			throw new CommandResponseException(ChatColor.RED + "Игрок {0} не телепортирован на спавн", otherPlayer.getName());
+			throw new CommandResponseException(ChatColor.RED + "Player {0} not teleported to spawn", otherPlayer.getName());
 		}
 	}
 
 	@Override
 	protected String getHelpExplainMessage() {
-		return "телепортирует указанного игрока на спавн";
+		return "forcefully teleport player to spawn";
 	}
 
 }
