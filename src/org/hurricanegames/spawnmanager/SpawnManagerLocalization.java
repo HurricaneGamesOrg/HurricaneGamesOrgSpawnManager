@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.ChatColor;
+import org.hurricanegames.commandlib.configurations.ConfigurationUtils.SimpleColorizedStringConfigurationField;
 import org.hurricanegames.commandlib.providers.messages.DefaultMessages;
 
 public class SpawnManagerLocalization extends DefaultMessages {
@@ -20,28 +21,28 @@ public class SpawnManagerLocalization extends DefaultMessages {
 		return storageFile;
 	}
 
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TIMEDIFFFORMAT_DAYS = " дней ";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TIMEDIFFFORMAT_HOURS = " часов ";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TIMEDIFFFORMAT_MINUTES = " минут ";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TIMEDIFFFORMAT_SECONDS = " секунд";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TIMEDIFFFORMAT_ZERO = "меньше секунды";
 
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TELEPORT_START = ChatColor.GREEN + "Вы ожидаете телепортацию, не двигайтесь в течение {0}";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TELEPORT_SUCCESS = ChatColor.GREEN + "Вы телепортировались на спавн";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TELEPORT_ERROR_UNKNOWN = ChatColor.RED + "Телепортация не удалась по неизвестной причине";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TELEPORT_ERROR_NOSPAWN = ChatColor.RED + "Телепортация не удалась так как точка спавна недоступна";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TELEPORT_ERROR_MOVED = ChatColor.RED + "Телепортация не удалась так как вы двинулись во время ожидания";
-	@ConfigurationFieldDefinition
+	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
 	public String TELEPORT_ERROR_TRACKED = ChatColor.RED + "Вы уже телепортируетесь";
 
 	public String formatTimeDiff(long diffMS) {
