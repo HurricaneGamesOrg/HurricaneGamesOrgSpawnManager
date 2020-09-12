@@ -4,11 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.hurricanegames.commandlib.commands.CommandBasic;
 import org.hurricanegames.commandlib.commands.CommandResponseException;
-import org.hurricanegames.spawnmanager.commands.SpawnCommandHelper;
+import org.hurricanegames.spawnmanager.commands.SpawnManagerCommandHelper;
 
-public class SpawnForceTeleportCommand extends CommandBasic<SpawnCommandHelper> {
+public class SpawnForceTeleportCommand extends CommandBasic<SpawnManagerCommandHelper> {
 
-	public SpawnForceTeleportCommand(SpawnCommandHelper helper) {
+	public SpawnForceTeleportCommand(SpawnManagerCommandHelper helper) {
 		super(helper);
 	}
 

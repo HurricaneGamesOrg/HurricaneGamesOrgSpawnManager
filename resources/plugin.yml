@@ -1,12 +1,15 @@
 name: HGOSpawnManager
 main: org.hurricanegames.spawnmanager.SpawnManagerPlugin
 api-version: 1.16
-version: 1.0
+version: 1.1
 authors:
 - _Shevchik_
 softdepend:
 - SpawnAPI
 commands:
+  spawnmanageradmin:
+    description: SpawnManager admin commands
+    usage: '/<command>'
   spawn:
     description: Teleport to spawn
     usage: '/<command>'

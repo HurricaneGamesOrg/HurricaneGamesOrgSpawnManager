@@ -6,11 +6,11 @@ import org.hurricanegames.commandlib.providers.playerinfo.BukkitPlayerInfoProvid
 import org.hurricanegames.spawnmanager.SpawnContainer;
 import org.hurricanegames.spawnmanager.SpawnManagerLocalization;
 
-public class SpawnCommandHelper extends CommandHelper<SpawnManagerLocalization, BukkitPlayerInfo, BukkitPlayerInfoProvider> {
+public class SpawnManagerCommandHelper extends CommandHelper<SpawnManagerLocalization, BukkitPlayerInfo, BukkitPlayerInfoProvider> {
 
 	protected final SpawnContainer container;
 
-	public SpawnCommandHelper(SpawnContainer container) {
+	public SpawnManagerCommandHelper(SpawnContainer container) {
 		super(container.getLocalization(), BukkitPlayerInfoProvider.INSTANCE);
 		this.container = container;
 	}

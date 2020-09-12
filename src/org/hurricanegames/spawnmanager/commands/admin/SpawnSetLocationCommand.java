@@ -4,11 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.hurricanegames.commandlib.commands.CommandBasic;
 import org.hurricanegames.commandlib.commands.CommandResponseException;
-import org.hurricanegames.spawnmanager.commands.SpawnCommandHelper;
+import org.hurricanegames.spawnmanager.commands.SpawnManagerCommandHelper;
 
-public class SpawnSetLocationCommand extends CommandBasic<SpawnCommandHelper> {
+public class SpawnSetLocationCommand extends CommandBasic<SpawnManagerCommandHelper> {
 
-	public SpawnSetLocationCommand(SpawnCommandHelper helper) {
+	public SpawnSetLocationCommand(SpawnManagerCommandHelper helper) {
 		super(helper);
 	}
 
