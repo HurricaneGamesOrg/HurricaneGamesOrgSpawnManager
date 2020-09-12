@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,20 +16,10 @@ import org.hurricanegames.commandlib.utils.Tuple;
 
 public class PlayerStandStillTracker implements Listener {
 
-	private static final PlayerStandStillTracker instance = new PlayerStandStillTracker();
+	protected final SpawnManagerPlugin plugin;
 
-	public static PlayerStandStillTracker getInstance() {
-		return instance;
-	}
-
-	private boolean init;
-	public void start() {
-		if (init) {
-			throw new IllegalStateException("Already initialized");
-		}
-		init = true;
-
-		Bukkit.getPluginManager().registerEvents(this, SpawnManagerPlugin.getInstance());
+	public PlayerStandStillTracker(SpawnManagerPlugin plugin) {
+		this.plugin = plugin;
 	}
 
 	protected final Map<UUID, Tuple<Consumer<TrackingResult>, BukkitTask>> tracked = new HashMap<>();
@@ -39,7 +28,7 @@ public class PlayerStandStillTracker implements Listener {
 		return tracked.containsKey(player.getUniqueId());
 	}
 
-	public void startTracking(Player player, int timeoutTicks, Consumer<TrackingResult> result) {
+	public void startTracking(Player player, long timeoutTicks, Consumer<TrackingResult> result) {
 		UUID uuid = player.getUniqueId();
 		if (timeoutTicks < 0) {
 			throw new IllegalArgumentException("Timeout ticks can't be negative");
@@ -47,7 +36,7 @@ public class PlayerStandStillTracker implements Listener {
 		if (tracked.containsKey(uuid)) {
 			throw new IllegalStateException("Player " + player.getUniqueId() + " is already tracked");
 		}
-		BukkitTask task = Bukkit.getScheduler().runTaskLater(SpawnManagerPlugin.getInstance(), () -> tryFinishTrack(uuid, false, TrackingResult.NO_MOVEMENT), timeoutTicks);
+		BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () -> tryFinishTrack(uuid, false, TrackingResult.NO_MOVEMENT), timeoutTicks);
 		tracked.put(uuid, new Tuple<>(result, task));
 	}
 

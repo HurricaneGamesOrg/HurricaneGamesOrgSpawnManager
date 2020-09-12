@@ -7,15 +7,15 @@ import org.hurricanegames.commandlib.configurations.SimpleConfiguration;
 
 public class SpawnManagerConfig extends SimpleConfiguration {
 
-	private static final SpawnManagerConfig instance = new SpawnManagerConfig();
+	protected final File storageFile;
 
-	public static SpawnManagerConfig getInstance() {
-		return instance;
+	public SpawnManagerConfig(File storageFile) {
+		this.storageFile = storageFile;
 	}
 
 	@Override
 	protected File getStorageFile() {
-		return SpawnManagerPlugin.getDataFile("config.yml");
+		return storageFile;
 	}
 
 	@ConfigurationFieldDefinition(fieldType = LongConfigurationField.class)

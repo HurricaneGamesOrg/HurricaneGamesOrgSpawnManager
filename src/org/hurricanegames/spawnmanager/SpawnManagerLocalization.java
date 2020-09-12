@@ -9,15 +9,15 @@ import org.hurricanegames.commandlib.providers.messages.DefaultMessages;
 
 public class SpawnManagerLocalization extends DefaultMessages {
 
-	private static final SpawnManagerLocalization instance = new SpawnManagerLocalization();
+	protected final File storageFile;
 
-	public static SpawnManagerLocalization getInstance() {
-		return instance;
+	public SpawnManagerLocalization(File storageFile) {
+		this.storageFile = storageFile;
 	}
 
 	@Override
 	protected File getStorageFile() {
-		return new File(SpawnManagerPlugin.getInstance().getDataFolder(), "localization.yml");
+		return storageFile;
 	}
 
 	@ConfigurationFieldDefinition

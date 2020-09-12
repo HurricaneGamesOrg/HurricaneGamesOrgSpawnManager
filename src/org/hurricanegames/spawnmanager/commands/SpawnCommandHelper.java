@@ -11,7 +11,7 @@ public class SpawnCommandHelper extends CommandHelper<SpawnManagerLocalization, 
 	protected final SpawnContainer container;
 
 	public SpawnCommandHelper(SpawnContainer container) {
-		super(SpawnManagerLocalization.getInstance(), BukkitPlayerInfoProvider.INSTANCE);
+		super(container.getLocalization(), BukkitPlayerInfoProvider.INSTANCE);
 		this.container = container;
 	}
 

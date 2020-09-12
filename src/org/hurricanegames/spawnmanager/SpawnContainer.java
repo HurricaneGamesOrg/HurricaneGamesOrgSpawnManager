@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -19,6 +18,31 @@ import spawnapi.SpawnAPI;
 
 public class SpawnContainer {
 
+	protected final SpawnManagerPlugin plugin;
+	protected final SpawnManagerConfig config;
+	protected final SpawnManagerLocalization localization;
+	protected final PlayerStandStillTracker standStillTracker;
+
+	public SpawnContainer(SpawnManagerPlugin plugin) {
+		this.plugin = plugin;
+		this.config = new SpawnManagerConfig(new File(plugin.getDataFolder(), "config.yml"));
+		this.localization = new SpawnManagerLocalization(new File(plugin.getDataFolder(), "localization.yml"));
+		this.standStillTracker = new PlayerStandStillTracker(plugin);
+	}
+
+	public SpawnManagerPlugin getPlugin() {
+		return plugin;
+	}
+
+	public SpawnManagerConfig getConfig() {
+		return config;
+	}
+
+	public SpawnManagerLocalization getLocalization() {
+		return localization;
+	}
+
+
 	private boolean init;
 	public void init() {
 		if (init) {
@@ -26,12 +50,13 @@ public class SpawnContainer {
 		}
 		init = true;
 
-		Bukkit.getPluginManager().registerEvents(new SpawnPlayerListener(this), SpawnManagerPlugin.getInstance());
+		plugin.getServer().getPluginManager().registerEvents(new SpawnPlayerListener(this), plugin);
+		plugin.getServer().getPluginManager().registerEvents(standStillTracker, plugin);
 		try {
-			Bukkit.getServicesManager().register(SpawnAPI.class, new SpawnAPIImpl(this), SpawnManagerPlugin.getInstance(), ServicePriority.Normal);
-			SpawnManagerPlugin.getInstance().getLogger().log(Level.INFO, "Enabled SpawnAPI integration");
+			plugin.getServer().getServicesManager().register(SpawnAPI.class, new SpawnAPIImpl(this), plugin, ServicePriority.Normal);
+			plugin.getLogger().log(Level.INFO, "Enabled SpawnAPI integration");
 		} catch (Throwable t) {
-			SpawnManagerPlugin.getInstance().getLogger().log(Level.INFO, "Failed to enable SpawnAPI integration: " + t.getMessage());
+			plugin.getLogger().log(Level.INFO, "Failed to enable SpawnAPI integration: " + t.getMessage());
 		}
 	}
 
@@ -41,13 +66,13 @@ public class SpawnContainer {
 	public void setLocation(Location location) {
 		Location previousLocation = getLocation();
 		if (previousLocation != null) {
-			previousLocation.getChunk().removePluginChunkTicket(SpawnManagerPlugin.getInstance());
+			previousLocation.getChunk().removePluginChunkTicket(plugin);
 		}
 
 		if (location != null) {
 			location.getWorld().setSpawnLocation(location);
 
-			location.getChunk().addPluginChunkTicket(SpawnManagerPlugin.getInstance());
+			location.getChunk().addPluginChunkTicket(plugin);
 
 			worldName = location.getWorld().getName();
 			spawnLocation = location.clone();
@@ -62,7 +87,7 @@ public class SpawnContainer {
 		if (worldName == null) {
 			return null;
 		}
-		World world = Bukkit.getWorld(worldName);
+		World world = plugin.getServer().getWorld(worldName);
 		if (world == null) {
 			return null;
 		}
@@ -74,11 +99,9 @@ public class SpawnContainer {
 	public TeleportAttemptResult teleport(Player player, Consumer<Boolean> result) {
 		Consumer<Boolean> nonnullResult = result != null ? result : success -> {};
 
-		SpawnManagerLocalization localization = SpawnManagerLocalization.getInstance();
-
 		Location location = getLocation();
 		if (location != null) {
-			int delayS = SpawnManagerConfig.getInstance().TELEPORT_DELAY.intValue();
+			long delayS = config.TELEPORT_DELAY.longValue();
 			if (player.hasPermission(SpawnManagerPermissions.TELEPORT_NODELAY) || (delayS <= 0)) {
 				boolean teleportSuccess = player.teleport(player);
 				if (teleportSuccess) {
@@ -90,12 +113,11 @@ public class SpawnContainer {
 				}
 			}
 
-			PlayerStandStillTracker tracker = PlayerStandStillTracker.getInstance();
-			if (tracker.isTracking(player)) {
+			if (standStillTracker.isTracking(player)) {
 				player.sendMessage(localization.TELEPORT_ERROR_TRACKED);
 				return TeleportAttemptResult.FAIL;
 			} else {
-				tracker.startTracking(player, delayS * 20, trackResult -> {
+				standStillTracker.startTracking(player, delayS * 20, trackResult -> {
 					switch (trackResult) {
 						case OFFLINE: {
 							nonnullResult.accept(Boolean.FALSE);
@@ -144,19 +166,19 @@ public class SpawnContainer {
 	protected static final String world_name_path = "world";
 	protected static final String location_path = "location";
 
-	protected File getFile() {
-		return new File(SpawnManagerPlugin.getInstance().getDataFolder(), "spawn.yml");
+	protected File getStorageFile() {
+		return new File(plugin.getDataFolder(), "spawn.yml");
 	}
 
 	public void load() {
-		ConfigurationSection config = YamlConfiguration.loadConfiguration(getFile());
+		ConfigurationSection storageConfig = YamlConfiguration.loadConfiguration(getStorageFile());
 
-		worldName = config.getString(world_name_path);
+		worldName = storageConfig.getString(world_name_path);
 		if (worldName == null) {
 			return;
 		}
 
-		spawnLocation = config.getLocation(location_path);
+		spawnLocation = storageConfig.getLocation(location_path);
 
 		//keep spawn chunk loaded as soon as the world it is in loads
 		new BukkitRunnable() {
@@ -165,21 +187,21 @@ public class SpawnContainer {
 				Location location = getLocation();
 				if (location != null) {
 					cancel();
-					location.getChunk().addPluginChunkTicket(SpawnManagerPlugin.getInstance());
+					location.getChunk().addPluginChunkTicket(plugin);
 				}
 			}
-		}.runTaskTimer(SpawnManagerPlugin.getInstance(), 1, 1);
+		}.runTaskTimer(plugin, 1, 1);
 	}
 
 	public void save() {
-		YamlConfiguration config = new YamlConfiguration();
+		YamlConfiguration storageConfig = new YamlConfiguration();
 
 		if (spawnLocation != null) {
-			config.set(world_name_path, worldName);
-			config.set(location_path, spawnLocation);
+			storageConfig.set(world_name_path, worldName);
+			storageConfig.set(location_path, spawnLocation);
 		}
 
-		ConfigurationUtils.safeSave(config, getFile());
+		ConfigurationUtils.safeSave(storageConfig, getStorageFile());
 	}
 
 }
