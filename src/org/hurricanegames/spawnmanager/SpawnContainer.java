@@ -103,7 +103,7 @@ public class SpawnContainer {
 		if (location != null) {
 			long delayS = config.TELEPORT_DELAY.longValue();
 			if (player.hasPermission(SpawnManagerPermissions.TELEPORT_NODELAY) || (delayS <= 0)) {
-				boolean teleportSuccess = player.teleport(player);
+				boolean teleportSuccess = player.teleport(location);
 				if (teleportSuccess) {
 					player.sendMessage(localization.TELEPORT_SUCCESS);
 					return TeleportAttemptResult.SUCCESS;
@@ -129,7 +129,7 @@ public class SpawnContainer {
 							break;
 						}
 						case NO_MOVEMENT: {
-							boolean teleportSuccess = player.teleport(player);
+							boolean teleportSuccess = player.teleport(location);
 							if (teleportSuccess) {
 								player.sendMessage(localization.TELEPORT_SUCCESS);
 								nonnullResult.accept(Boolean.TRUE);
