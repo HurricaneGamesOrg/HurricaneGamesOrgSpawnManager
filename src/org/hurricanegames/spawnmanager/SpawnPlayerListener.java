@@ -28,7 +28,7 @@ public class SpawnPlayerListener implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
-		if (event.isBedSpawn()) {
+		if (event.isBedSpawn() || event.isAnchorSpawn()) {
 			return;
 		}
 		Location location = container.getLocation();
