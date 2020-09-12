@@ -22,28 +22,28 @@ public class SpawnManagerLocalization extends DefaultMessages {
 	}
 
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TIMEDIFFFORMAT_DAYS = " дней ";
+	public String TIMEDIFFFORMAT_DAYS = " days ";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TIMEDIFFFORMAT_HOURS = " часов ";
+	public String TIMEDIFFFORMAT_HOURS = " hours ";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TIMEDIFFFORMAT_MINUTES = " минут ";
+	public String TIMEDIFFFORMAT_MINUTES = " minutes ";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TIMEDIFFFORMAT_SECONDS = " секунд";
+	public String TIMEDIFFFORMAT_SECONDS = " seconds";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TIMEDIFFFORMAT_ZERO = "меньше секунды";
+	public String TIMEDIFFFORMAT_ZERO = "less than a second";
 
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TELEPORT_START = ChatColor.GREEN + "Вы ожидаете телепортацию, не двигайтесь в течение {0}";
+	public String TELEPORT_START = ChatColor.GREEN + "You are being teleported, dont move for {0}";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TELEPORT_SUCCESS = ChatColor.GREEN + "Вы телепортировались на спавн";
+	public String TELEPORT_SUCCESS = ChatColor.GREEN + "You have been teleported to spawn";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TELEPORT_ERROR_UNKNOWN = ChatColor.RED + "Телепортация не удалась по неизвестной причине";
+	public String TELEPORT_ERROR_NOSPAWN = ChatColor.RED + "Teleportation impossible because spawn point is unvailable";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TELEPORT_ERROR_NOSPAWN = ChatColor.RED + "Телепортация не удалась так как точка спавна недоступна";
+	public String TELEPORT_ERROR_TRACKED = ChatColor.RED + "You are already being teleported";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TELEPORT_ERROR_MOVED = ChatColor.RED + "Телепортация не удалась так как вы двинулись во время ожидания";
+	public String TELEPORT_ERROR_MOVED = ChatColor.RED + "Teleportation has been cancelled because you moved";
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)
-	public String TELEPORT_ERROR_TRACKED = ChatColor.RED + "Вы уже телепортируетесь";
+	public String TELEPORT_ERROR_UNKNOWN = ChatColor.RED + "Teleportation failed because of unknown reason";
 
 	public String formatTimeDiff(long diffMS) {
 		StringBuilder message = new StringBuilder();
