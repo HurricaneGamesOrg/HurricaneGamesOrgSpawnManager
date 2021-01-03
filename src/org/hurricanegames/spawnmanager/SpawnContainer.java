@@ -12,7 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.hurricanegames.commandlib.configurations.ConfigurationUtils;
+import org.hurricanegames.pluginlib.configurations.ConfigurationUtils;
 
 import spawnapi.SpawnAPI;
 

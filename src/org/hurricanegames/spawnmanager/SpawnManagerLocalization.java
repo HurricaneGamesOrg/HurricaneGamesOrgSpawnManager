@@ -5,10 +5,11 @@ import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.ChatColor;
-import org.hurricanegames.commandlib.configurations.ConfigurationUtils.SimpleColorizedStringConfigurationField;
-import org.hurricanegames.commandlib.providers.messages.DefaultMessages;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.hurricanegames.pluginlib.configurations.ConfigurationUtils;
+import org.hurricanegames.pluginlib.configurations.builtin.DefaultCommandMessages;
 
-public class SpawnManagerLocalization extends DefaultMessages {
+public class SpawnManagerLocalization extends DefaultCommandMessages {
 
 	protected final File storageFile;
 
@@ -17,8 +18,15 @@ public class SpawnManagerLocalization extends DefaultMessages {
 	}
 
 	@Override
-	protected File getStorageFile() {
-		return storageFile;
+	public void load() {
+		load(YamlConfiguration.loadConfiguration(storageFile));
+	}
+
+	@Override
+	public void save() {
+		YamlConfiguration config = new YamlConfiguration();
+		save(config);
+		ConfigurationUtils.safeSave(config, storageFile);
 	}
 
 	@ConfigurationFieldDefinition(fieldType = SimpleColorizedStringConfigurationField.class)

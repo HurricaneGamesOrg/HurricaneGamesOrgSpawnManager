@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitTask;
-import org.hurricanegames.commandlib.utils.Tuple;
+import org.hurricanegames.pluginlib.utils.types.Tuple;
 
 public class PlayerStandStillTracker implements Listener {
 

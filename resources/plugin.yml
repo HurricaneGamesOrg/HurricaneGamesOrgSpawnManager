@@ -1,11 +1,11 @@
 name: HGOSpawnManager
 main: org.hurricanegames.spawnmanager.SpawnManagerPlugin
 api-version: 1.16
-version: 1.2
-authors:
-- _Shevchik_
+version: 1.3
+
 softdepend:
 - SpawnAPI
+
 commands:
   spawnmanageradmin:
     description: SpawnManager admin commands
@@ -19,3 +19,15 @@ commands:
   setspawn:
     description: Set spawn location
     usage: '/<command>'
+
+permissions:
+  hgo.chatmanager.admin:
+    description: Admin access
+    default: op
+  hgo.spawnmanage.teleport.nodelay:
+    description: Teleport to spawn without delay
+    default: op
+
+authors:
+- _Shevchik_
+website: 'https://github.com/HurricaneGamesOrg/HurricaneGamesOrgSpawnManager'

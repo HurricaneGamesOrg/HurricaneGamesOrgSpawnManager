@@ -2,20 +2,12 @@ package org.hurricanegames.spawnmanager;
 
 import java.io.File;
 
-import org.hurricanegames.commandlib.configurations.ConfigurationUtils.LongConfigurationField;
-import org.hurricanegames.commandlib.configurations.SimpleConfiguration;
+import org.hurricanegames.pluginlib.configurations.annotated.AnnotatedRootYamlConfiguration;
 
-public class SpawnManagerConfig extends SimpleConfiguration {
-
-	protected final File storageFile;
+public class SpawnManagerConfig extends AnnotatedRootYamlConfiguration {
 
 	public SpawnManagerConfig(File storageFile) {
-		this.storageFile = storageFile;
-	}
-
-	@Override
-	protected File getStorageFile() {
-		return storageFile;
+		super(storageFile);
 	}
 
 	@ConfigurationFieldDefinition(fieldType = LongConfigurationField.class)

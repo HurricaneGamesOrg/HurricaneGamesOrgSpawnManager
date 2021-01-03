@@ -56,7 +56,7 @@ repositories {
 }
 
 dependencies {
-	compile group: 'com.github.HurricaneGamesOrg', name: 'HurricaneGamesCommandLib', version: '7814283599'
+	compile group: 'com.github.HurricaneGamesOrg', name: 'HurricaneGamesOrgPluginLib', version: '838c737176'
 	compileOnly group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.16.3-R0.1-SNAPSHOT'
 	compileOnly group: 'com.github.HurricaneGamesOrg', name: 'SpawnAPI', version: '8702d9435a'
 }
@@ -73,7 +73,7 @@ shadowJar {
 
 	archiveName = jar.archiveName
 
-	String relocatePrefix = 'org.hurricanegames.spawnmanager.zlibs.'
+	String relocatePrefix = project.group + '.' + project.name.toLowerCase(Locale.ENGLISH) + '.zlibs.'
 
 	relocate 'org.hurricanegames.commandlib', relocatePrefix + 'org.hurricanegames.commandlib'
 

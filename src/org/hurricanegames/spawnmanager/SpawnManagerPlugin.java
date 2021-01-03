@@ -1,7 +1,7 @@
 package org.hurricanegames.spawnmanager;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.hurricanegames.commandlib.commands.BukkitCommandExecutor;
+import org.hurricanegames.pluginlib.commands.BukkitCommandExecutor;
 import org.hurricanegames.spawnmanager.commands.SpawnManagerCommandHelper;
 import org.hurricanegames.spawnmanager.commands.admin.SpawnForceTeleportCommand;
 import org.hurricanegames.spawnmanager.commands.admin.SpawnManagerAdminCommands;
@@ -22,9 +22,9 @@ public class SpawnManagerPlugin extends JavaPlugin {
 		container.load();
 
 		SpawnManagerCommandHelper commandhelper = new SpawnManagerCommandHelper(container);
-		getCommand("spawnmanageradmin").setExecutor(new BukkitCommandExecutor(new SpawnManagerAdminCommands(commandhelper), SpawnManagerPermissions.ADMIN));
-		getCommand("setspawn").setExecutor(new BukkitCommandExecutor(new SpawnSetLocationCommand(commandhelper), SpawnManagerPermissions.ADMIN));
-		getCommand("fspawn").setExecutor(new BukkitCommandExecutor(new SpawnForceTeleportCommand(commandhelper), SpawnManagerPermissions.ADMIN));
+		getCommand("spawnmanageradmin").setExecutor(new BukkitCommandExecutor(new SpawnManagerAdminCommands(commandhelper)));
+		getCommand("setspawn").setExecutor(new BukkitCommandExecutor(new SpawnSetLocationCommand(commandhelper)));
+		getCommand("fspawn").setExecutor(new BukkitCommandExecutor(new SpawnForceTeleportCommand(commandhelper)));
 		getCommand("spawn").setExecutor(new BukkitCommandExecutor(new SpawnTeleportCommand(commandhelper)));
 
 		init = true;

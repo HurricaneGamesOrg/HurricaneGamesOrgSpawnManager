@@ -2,14 +2,15 @@ package org.hurricanegames.spawnmanager.commands.admin;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.hurricanegames.commandlib.commands.CommandBasic;
-import org.hurricanegames.commandlib.commands.CommandResponseException;
+import org.hurricanegames.pluginlib.commands.CommandBasic;
+import org.hurricanegames.pluginlib.commands.CommandResponseException;
+import org.hurricanegames.spawnmanager.SpawnManagerPermissions;
 import org.hurricanegames.spawnmanager.commands.SpawnManagerCommandHelper;
 
 public class SpawnForceTeleportCommand extends CommandBasic<SpawnManagerCommandHelper> {
 
 	public SpawnForceTeleportCommand(SpawnManagerCommandHelper helper) {
-		super(helper);
+		super(helper, SpawnManagerPermissions.ADMIN);
 	}
 
 	@CommandHandler
