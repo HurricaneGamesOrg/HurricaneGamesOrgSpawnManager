@@ -21,10 +21,10 @@ commands:
     usage: '/<command>'
 
 permissions:
-  hgo.chatmanager.admin:
+  hgo.spawnmanager.admin:
     description: Admin access
     default: op
-  hgo.spawnmanage.teleport.nodelay:
+  hgo.spawnmanager.teleport.nodelay:
     description: Teleport to spawn without delay
     default: op
 
